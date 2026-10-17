@@ -1,0 +1,30 @@
+{
+  "target": { "name": "26H2", "build": 26300 },
+
+  "enablement": {
+    "kb": "KB5121794",
+    "eligibleBuilds": [26100, 26200],
+    "catalog": "https://www.catalog.update.microsoft.com/Search.aspx?q=KB5121794",
+    "packages": {
+      "x64":   { "size": 177535, "url": "https://catalog.sf.dl.delivery.mp.microsoft.com/filestreamingservice/files/94520a88-858f-4832-a57d-7211f6d84a4e/public/Windows11.0-KB5121794-x64_5e20a3cce48d6611b16bdec42b07167f5456586a.msu" },
+      "arm64": { "size": 178969, "url": "https://catalog.sf.dl.delivery.mp.microsoft.com/filestreamingservice/files/9d8dc3d0-9cbf-4eb1-9411-722e3e6a19b3/public/Windows11.0-KB5121794-arm64_77a76caf2d362bb293a4d18058388f2717365abe.msu" }
+    }
+  },
+
+  "prerequisite": {
+    "kb": "KB5120998",
+    "minUbr": 9278,
+    "catalog": "https://www.catalog.update.microsoft.com/Search.aspx?q=KB5120998",
+    "packages": {
+      "x64":   { "size": 4667947408, "url": "https://catalog.sf.dl.delivery.mp.microsoft.com/filestreamingservice/files/7416ff4e-4741-42fb-a16b-0a92e2dfc42b/public/windows11.0-kb5120998-x64_5cdebefaecf780c7487e56a0d5472830a24a673a.msu" },
+      "arm64": null
+    }
+  },
+
+  "iso": {
+    "profile": "606624d44113",
+    "orgId": "y6jn8c31",
+    "x64":   { "editionId": 3813, "page": "https://www.microsoft.com/software-download/windows11" },
+    "arm64": { "editionId": 3816, "page": "https://www.microsoft.com/software-download/windows11arm64" }
+  }
+}

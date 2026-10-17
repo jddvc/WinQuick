@@ -1,0 +1,477 @@
+<Window xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="WinQuick - Windows 11 26H2" Width="1080" Height="720" MinWidth="940" MinHeight="620"
+        WindowStartupLocation="CenterScreen" Background="#0E0E13"
+        FontFamily="Segoe UI" FontSize="13" UseLayoutRounding="True" SnapsToDevicePixels="True">
+  <Window.Resources>
+    <SolidColorBrush x:Key="BgBrush" Color="#0E0E13"/>
+    <SolidColorBrush x:Key="SideBrush" Color="#121218"/>
+    <SolidColorBrush x:Key="CardBrush" Color="#17171F"/>
+    <SolidColorBrush x:Key="Card2Brush" Color="#1F1F2B"/>
+    <SolidColorBrush x:Key="LineBrush" Color="#292938"/>
+    <SolidColorBrush x:Key="TextBrush" Color="#EDEDF5"/>
+    <SolidColorBrush x:Key="MutedBrush" Color="#9696AC"/>
+    <SolidColorBrush x:Key="AccentBrush" Color="#8B5CF6"/>
+    <LinearGradientBrush x:Key="AccentGradient" StartPoint="0,0" EndPoint="1,1">
+      <GradientStop Color="#7C3AED" Offset="0"/>
+      <GradientStop Color="#A855F7" Offset="1"/>
+    </LinearGradientBrush>
+
+    <Style TargetType="TextBlock">
+      <Setter Property="Foreground" Value="{StaticResource TextBrush}"/>
+      <Setter Property="TextWrapping" Value="Wrap"/>
+    </Style>
+    <Style x:Key="H1" TargetType="TextBlock" BasedOn="{StaticResource {x:Type TextBlock}}">
+      <Setter Property="FontSize" Value="28"/><Setter Property="FontWeight" Value="SemiBold"/>
+      <Setter Property="Foreground" Value="{StaticResource TextBrush}"/>
+    </Style>
+    <Style x:Key="Sub" TargetType="TextBlock" BasedOn="{StaticResource {x:Type TextBlock}}">
+      <Setter Property="FontSize" Value="13.5"/><Setter Property="Foreground" Value="{StaticResource MutedBrush}"/>
+      <Setter Property="Margin" Value="0,4,0,0"/>
+    </Style>
+    <Style x:Key="Muted" TargetType="TextBlock" BasedOn="{StaticResource {x:Type TextBlock}}">
+      <Setter Property="Foreground" Value="{StaticResource MutedBrush}"/>
+    </Style>
+    <Style x:Key="Lbl" TargetType="TextBlock" BasedOn="{StaticResource {x:Type TextBlock}}">
+      <Setter Property="FontSize" Value="11.5"/><Setter Property="Foreground" Value="{StaticResource MutedBrush}"/>
+    </Style>
+    <Style x:Key="Val" TargetType="TextBlock" BasedOn="{StaticResource {x:Type TextBlock}}">
+      <Setter Property="FontSize" Value="15"/><Setter Property="FontWeight" Value="SemiBold"/>
+      <Setter Property="Margin" Value="0,3,0,0"/>
+    </Style>
+    <Style x:Key="CardTitle" TargetType="TextBlock" BasedOn="{StaticResource {x:Type TextBlock}}">
+      <Setter Property="FontSize" Value="16"/><Setter Property="FontWeight" Value="SemiBold"/>
+    </Style>
+    <Style x:Key="Glyph" TargetType="TextBlock" BasedOn="{StaticResource {x:Type TextBlock}}">
+      <Setter Property="FontFamily" Value="Segoe MDL2 Assets"/>
+    </Style>
+
+    <Style x:Key="Card" TargetType="Border">
+      <Setter Property="Background" Value="{StaticResource CardBrush}"/>
+      <Setter Property="BorderBrush" Value="{StaticResource LineBrush}"/>
+      <Setter Property="BorderThickness" Value="1"/>
+      <Setter Property="CornerRadius" Value="14"/>
+      <Setter Property="Padding" Value="22"/>
+      <Setter Property="Margin" Value="0,0,0,16"/>
+    </Style>
+    <Style x:Key="Tile" TargetType="Border">
+      <Setter Property="Background" Value="{StaticResource Card2Brush}"/>
+      <Setter Property="CornerRadius" Value="10"/>
+      <Setter Property="Padding" Value="14,11"/>
+      <Setter Property="Margin" Value="0,0,10,10"/>
+    </Style>
+
+    <!-- Buttons -->
+    <Style TargetType="Button">
+      <Setter Property="Foreground" Value="{StaticResource TextBrush}"/>
+      <Setter Property="Background" Value="{StaticResource Card2Brush}"/>
+      <Setter Property="BorderBrush" Value="{StaticResource LineBrush}"/>
+      <Setter Property="BorderThickness" Value="1"/>
+      <Setter Property="Padding" Value="20,10"/>
+      <Setter Property="FontWeight" Value="SemiBold"/>
+      <Setter Property="Cursor" Value="Hand"/>
+      <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+      <Setter Property="Template">
+        <Setter.Value>
+          <ControlTemplate TargetType="Button">
+            <Grid x:Name="root">
+              <Border x:Name="bd" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}"
+                      BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="10" Padding="{TemplateBinding Padding}">
+                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+              </Border>
+              <Border x:Name="hl" Background="White" Opacity="0" CornerRadius="10" IsHitTestVisible="False"/>
+            </Grid>
+            <ControlTemplate.Triggers>
+              <Trigger Property="IsMouseOver" Value="True"><Setter TargetName="hl" Property="Opacity" Value="0.08"/></Trigger>
+              <Trigger Property="IsPressed" Value="True"><Setter TargetName="hl" Property="Opacity" Value="0.16"/></Trigger>
+              <Trigger Property="IsKeyboardFocused" Value="True"><Setter TargetName="bd" Property="BorderBrush" Value="#A78BFA"/></Trigger>
+              <Trigger Property="IsEnabled" Value="False"><Setter TargetName="root" Property="Opacity" Value="0.38"/></Trigger>
+            </ControlTemplate.Triggers>
+          </ControlTemplate>
+        </Setter.Value>
+      </Setter>
+    </Style>
+    <Style x:Key="Primary" TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
+      <Setter Property="Background" Value="{StaticResource AccentGradient}"/>
+      <Setter Property="BorderThickness" Value="0"/>
+      <Setter Property="Foreground" Value="White"/>
+    </Style>
+    <Style x:Key="Ghost" TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
+      <Setter Property="Background" Value="Transparent"/>
+      <Setter Property="BorderThickness" Value="0"/>
+      <Setter Property="Foreground" Value="#B79CFF"/>
+    </Style>
+
+    <!-- Progress bar -->
+    <Style TargetType="ProgressBar">
+      <Setter Property="Height" Value="10"/>
+      <Setter Property="Maximum" Value="100"/>
+      <Setter Property="Template">
+        <Setter.Value>
+          <ControlTemplate TargetType="ProgressBar">
+            <Grid>
+              <Border Background="#262637" CornerRadius="5"/>
+              <Border x:Name="PART_Track">
+                <Border x:Name="PART_Indicator" HorizontalAlignment="Left" CornerRadius="5" Background="{StaticResource AccentGradient}"/>
+              </Border>
+            </Grid>
+          </ControlTemplate>
+        </Setter.Value>
+      </Setter>
+    </Style>
+
+    <!-- Scrollbar -->
+    <Style TargetType="ScrollBar">
+      <Setter Property="Width" Value="10"/>
+      <Setter Property="Template">
+        <Setter.Value>
+          <ControlTemplate TargetType="ScrollBar">
+            <Grid Background="Transparent">
+              <Track x:Name="PART_Track" IsDirectionReversed="True">
+                <Track.Thumb>
+                  <Thumb MinHeight="36">
+                    <Thumb.Template>
+                      <ControlTemplate TargetType="Thumb"><Border CornerRadius="4" Background="#34344A" Margin="2,0"/></ControlTemplate>
+                    </Thumb.Template>
+                  </Thumb>
+                </Track.Thumb>
+                <Track.DecreaseRepeatButton><RepeatButton Command="ScrollBar.PageUpCommand" Opacity="0"/></Track.DecreaseRepeatButton>
+                <Track.IncreaseRepeatButton><RepeatButton Command="ScrollBar.PageDownCommand" Opacity="0"/></Track.IncreaseRepeatButton>
+              </Track>
+            </Grid>
+          </ControlTemplate>
+        </Setter.Value>
+      </Setter>
+    </Style>
+
+    <!-- Sidebar nav -->
+    <Style x:Key="Nav" TargetType="RadioButton">
+      <Setter Property="Foreground" Value="{StaticResource MutedBrush}"/>
+      <Setter Property="Cursor" Value="Hand"/>
+      <Setter Property="FontSize" Value="14"/>
+      <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+      <Setter Property="Template">
+        <Setter.Value>
+          <ControlTemplate TargetType="RadioButton">
+            <Border x:Name="bd" CornerRadius="10" Padding="14,11" Margin="0,2" Background="Transparent">
+              <Grid>
+                <Border x:Name="bar" Width="3" Height="18" CornerRadius="2" HorizontalAlignment="Left" Margin="-14,0,0,0"
+                        Background="{StaticResource AccentGradient}" Visibility="Collapsed"/>
+                <StackPanel Orientation="Horizontal">
+                  <TextBlock FontFamily="Segoe MDL2 Assets" FontSize="16" Width="26" VerticalAlignment="Center"
+                             Text="{TemplateBinding Tag}" Foreground="{Binding Foreground, RelativeSource={RelativeSource TemplatedParent}}"/>
+                  <ContentPresenter VerticalAlignment="Center" TextElement.Foreground="{Binding Foreground, RelativeSource={RelativeSource TemplatedParent}}"/>
+                </StackPanel>
+              </Grid>
+            </Border>
+            <ControlTemplate.Triggers>
+              <Trigger Property="IsMouseOver" Value="True"><Setter TargetName="bd" Property="Background" Value="#181822"/></Trigger>
+              <Trigger Property="IsChecked" Value="True">
+                <Setter TargetName="bd" Property="Background" Value="#211C35"/>
+                <Setter TargetName="bar" Property="Visibility" Value="Visible"/>
+                <Setter Property="Foreground" Value="#F3EEFF"/>
+              </Trigger>
+            </ControlTemplate.Triggers>
+          </ControlTemplate>
+        </Setter.Value>
+      </Setter>
+    </Style>
+  </Window.Resources>
+
+  <Grid>
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition Width="232"/>
+      <ColumnDefinition Width="*"/>
+    </Grid.ColumnDefinitions>
+
+    <!-- Sidebar -->
+    <Border Background="{StaticResource SideBrush}" BorderBrush="{StaticResource LineBrush}" BorderThickness="0,0,1,0">
+      <DockPanel Margin="16,22,16,18">
+        <StackPanel DockPanel.Dock="Top" Margin="6,0,0,26" Orientation="Horizontal">
+          <Border Width="40" Height="40" CornerRadius="11" Background="{StaticResource AccentGradient}">
+            <TextBlock Style="{StaticResource Glyph}" Text="&#xE896;" FontSize="19" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+          </Border>
+          <StackPanel Margin="12,0,0,0" VerticalAlignment="Center">
+            <TextBlock Text="WinQuick" FontSize="18" FontWeight="Bold"/>
+            <TextBlock x:Name="brandSub" Text="Windows 11 26H2" Style="{StaticResource Lbl}"/>
+          </StackPanel>
+        </StackPanel>
+
+        <StackPanel DockPanel.Dock="Bottom">
+          <Border x:Name="adminBadge" CornerRadius="8" Background="#1B1B26" Padding="12,9" Margin="0,0,0,0">
+            <StackPanel Orientation="Horizontal">
+              <TextBlock x:Name="adminIcon" Style="{StaticResource Glyph}" Text="&#xE73E;" Foreground="#34D399" VerticalAlignment="Center" Margin="0,0,8,0"/>
+              <TextBlock x:Name="adminText" Text="Running as administrator" Style="{StaticResource Lbl}" VerticalAlignment="Center"/>
+            </StackPanel>
+          </Border>
+          <TextBlock x:Name="verText" Text="v1.0.0" Style="{StaticResource Lbl}" Margin="6,10,0,0"/>
+        </StackPanel>
+
+        <StackPanel>
+          <RadioButton x:Name="navHome"  Style="{StaticResource Nav}" Tag="&#xE80F;" Content="Dashboard" GroupName="nav" IsChecked="True"/>
+          <RadioButton x:Name="navFast"  Style="{StaticResource Nav}" Tag="&#xE945;" Content="Fast update" GroupName="nav"/>
+          <RadioButton x:Name="navIso"   Style="{StaticResource Nav}" Tag="&#xE958;" Content="ISO upgrade" GroupName="nav"/>
+          <RadioButton x:Name="navTools" Style="{StaticResource Nav}" Tag="&#xE90F;" Content="Tools" GroupName="nav"/>
+          <RadioButton x:Name="navAbout" Style="{StaticResource Nav}" Tag="&#xE946;" Content="About" GroupName="nav"/>
+        </StackPanel>
+      </DockPanel>
+    </Border>
+
+    <!-- Pages -->
+    <Grid Grid.Column="1">
+
+      <!-- Dashboard -->
+      <Grid x:Name="pageHome" Margin="38,32,38,20">
+        <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="*"/></Grid.RowDefinitions>
+        <StackPanel Margin="0,0,0,20">
+          <TextBlock Text="Dashboard" Style="{StaticResource H1}"/>
+          <TextBlock Text="What your PC is running and the quickest way to Windows 11 26H2." Style="{StaticResource Sub}"/>
+        </StackPanel>
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+          <StackPanel Margin="0,0,14,0">
+
+            <Border x:Name="bannerSse" Style="{StaticResource Card}" Background="#2A1717" BorderBrush="#6B2B2B" Visibility="Collapsed" Padding="18">
+              <StackPanel Orientation="Horizontal">
+                <TextBlock Style="{StaticResource Glyph}" Text="&#xE7BA;" FontSize="20" Foreground="#F87171" Margin="0,0,14,0"/>
+                <TextBlock x:Name="bannerSseText" Width="620" Foreground="#FCA5A5"/>
+              </StackPanel>
+            </Border>
+
+            <Border Style="{StaticResource Card}" Padding="26" BorderBrush="#43307A">
+              <Border.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                  <GradientStop Color="#231A3F" Offset="0"/>
+                  <GradientStop Color="#17171F" Offset="0.75"/>
+                </LinearGradientBrush>
+              </Border.Background>
+              <StackPanel>
+                <TextBlock x:Name="homeTag" Text="RECOMMENDED" FontSize="11" FontWeight="Bold" Foreground="#B79CFF"/>
+                <TextBlock x:Name="homeHead" Text="Checking your PC..." FontSize="24" FontWeight="SemiBold" Margin="0,6,0,0"/>
+                <TextBlock x:Name="homeBody" Style="{StaticResource Muted}" FontSize="14" Margin="0,8,0,0" MaxWidth="640" HorizontalAlignment="Left"/>
+                <StackPanel Orientation="Horizontal" Margin="0,20,0,0">
+                  <Button x:Name="btnHomePrimary" Style="{StaticResource Primary}" Content="Update now" Margin="0,0,10,0"/>
+                  <Button x:Name="btnHomeSecondary" Content="Use the full ISO instead"/>
+                </StackPanel>
+              </StackPanel>
+            </Border>
+
+            <Border Style="{StaticResource Card}">
+              <StackPanel>
+                <TextBlock Text="Your PC" Style="{StaticResource CardTitle}" Margin="0,0,0,14"/>
+                <UniformGrid Columns="3">
+                  <Border Style="{StaticResource Tile}"><StackPanel><TextBlock Text="Windows" Style="{StaticResource Lbl}"/><TextBlock x:Name="stWin" Style="{StaticResource Val}"/></StackPanel></Border>
+                  <Border Style="{StaticResource Tile}"><StackPanel><TextBlock Text="Build" Style="{StaticResource Lbl}"/><TextBlock x:Name="stBuild" Style="{StaticResource Val}"/></StackPanel></Border>
+                  <Border Style="{StaticResource Tile}"><StackPanel><TextBlock Text="Edition" Style="{StaticResource Lbl}"/><TextBlock x:Name="stEdition" Style="{StaticResource Val}"/></StackPanel></Border>
+                  <Border Style="{StaticResource Tile}"><StackPanel><TextBlock Text="Language" Style="{StaticResource Lbl}"/><TextBlock x:Name="stLang" Style="{StaticResource Val}"/></StackPanel></Border>
+                  <Border Style="{StaticResource Tile}"><StackPanel><TextBlock Text="Architecture" Style="{StaticResource Lbl}"/><TextBlock x:Name="stArch" Style="{StaticResource Val}"/></StackPanel></Border>
+                  <Border Style="{StaticResource Tile}"><StackPanel><TextBlock Text="SSE4.2 (required)" Style="{StaticResource Lbl}"/><TextBlock x:Name="stSse" Style="{StaticResource Val}"/></StackPanel></Border>
+                  <Border Style="{StaticResource Tile}"><StackPanel><TextBlock Text="Free space on system drive" Style="{StaticResource Lbl}"/><TextBlock x:Name="stSpace" Style="{StaticResource Val}"/></StackPanel></Border>
+                  <Border Style="{StaticResource Tile}"><StackPanel><TextBlock Text="Firmware" Style="{StaticResource Lbl}"/><TextBlock x:Name="stBoot" Style="{StaticResource Val}"/></StackPanel></Border>
+                  <Border Style="{StaticResource Tile}"><StackPanel><TextBlock Text="Prerequisite update" Style="{StaticResource Lbl}"/><TextBlock x:Name="stPrereq" Style="{StaticResource Val}"/></StackPanel></Border>
+                </UniformGrid>
+              </StackPanel>
+            </Border>
+          </StackPanel>
+        </ScrollViewer>
+      </Grid>
+
+      <!-- Fast update -->
+      <Grid x:Name="pageFast" Margin="38,32,38,20" Visibility="Collapsed">
+        <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="*"/></Grid.RowDefinitions>
+        <StackPanel Margin="0,0,0,20">
+          <TextBlock Text="Fast update" Style="{StaticResource H1}"/>
+          <TextBlock x:Name="fastSub" Style="{StaticResource Sub}"/>
+        </StackPanel>
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+          <StackPanel Margin="0,0,14,0">
+            <Border Style="{StaticResource Card}">
+              <StackPanel>
+                <Grid Margin="0,0,0,16">
+                  <Grid.ColumnDefinitions><ColumnDefinition Width="44"/><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+                  <Border Width="30" Height="30" CornerRadius="15" Background="#242434" HorizontalAlignment="Left" VerticalAlignment="Top">
+                    <TextBlock x:Name="s0Icon" Style="{StaticResource Glyph}" Text="&#xE73E;" Foreground="#34D399" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                  </Border>
+                  <StackPanel Grid.Column="1">
+                    <TextBlock x:Name="s0Title" Text="Prerequisite update" FontWeight="SemiBold" FontSize="14.5"/>
+                    <TextBlock x:Name="s0Detail" Style="{StaticResource Muted}" Margin="0,2,0,0"/>
+                  </StackPanel>
+                  <TextBlock x:Name="s0Right" Grid.Column="2" Style="{StaticResource Muted}" VerticalAlignment="Top"/>
+                </Grid>
+                <Grid Margin="0,0,0,16">
+                  <Grid.ColumnDefinitions><ColumnDefinition Width="44"/><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+                  <Border Width="30" Height="30" CornerRadius="15" Background="#242434" HorizontalAlignment="Left" VerticalAlignment="Top">
+                    <TextBlock x:Name="s1Icon" Style="{StaticResource Glyph}" Text="&#xE896;" Foreground="#9696AC" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                  </Border>
+                  <StackPanel Grid.Column="1">
+                    <TextBlock x:Name="s1Title" Text="Download the 26H2 package" FontWeight="SemiBold" FontSize="14.5"/>
+                    <TextBlock x:Name="s1Detail" Style="{StaticResource Muted}" Margin="0,2,0,0"/>
+                  </StackPanel>
+                  <TextBlock x:Name="s1Right" Grid.Column="2" Style="{StaticResource Muted}" VerticalAlignment="Top"/>
+                </Grid>
+                <Grid>
+                  <Grid.ColumnDefinitions><ColumnDefinition Width="44"/><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+                  <Border Width="30" Height="30" CornerRadius="15" Background="#242434" HorizontalAlignment="Left" VerticalAlignment="Top">
+                    <TextBlock x:Name="s2Icon" Style="{StaticResource Glyph}" Text="&#xE73E;" Foreground="#9696AC" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                  </Border>
+                  <StackPanel Grid.Column="1">
+                    <TextBlock x:Name="s2Title" Text="Verify and install" FontWeight="SemiBold" FontSize="14.5"/>
+                    <TextBlock x:Name="s2Detail" Text="The file's fingerprint is checked, then Windows installs it. One restart finishes the job." Style="{StaticResource Muted}" Margin="0,2,0,0"/>
+                  </StackPanel>
+                  <TextBlock x:Name="s2Right" Grid.Column="2" Style="{StaticResource Muted}" VerticalAlignment="Top"/>
+                </Grid>
+              </StackPanel>
+            </Border>
+
+            <Border x:Name="fastProgCard" Style="{StaticResource Card}" Visibility="Collapsed">
+              <StackPanel>
+                <TextBlock x:Name="fastAction" FontWeight="SemiBold" FontSize="14.5" Margin="0,0,0,12"/>
+                <ProgressBar x:Name="fastBar"/>
+                <Grid Margin="0,10,0,0">
+                  <TextBlock x:Name="fastDetail" Style="{StaticResource Lbl}" HorizontalAlignment="Left"/>
+                  <TextBlock x:Name="fastSpeed" Style="{StaticResource Lbl}" HorizontalAlignment="Right"/>
+                </Grid>
+              </StackPanel>
+            </Border>
+
+            <TextBlock x:Name="fastResult" FontSize="14" Margin="2,0,0,14" Visibility="Collapsed"/>
+
+            <StackPanel Orientation="Horizontal">
+              <Button x:Name="btnFastStart" Style="{StaticResource Primary}" Content="Start update" Margin="0,0,10,0"/>
+              <Button x:Name="btnFastCancel" Content="Cancel" Visibility="Collapsed" Margin="0,0,10,0"/>
+              <Button x:Name="btnFastRestart" Style="{StaticResource Primary}" Content="Restart now" Visibility="Collapsed" Margin="0,0,10,0"/>
+              <Button x:Name="btnFastFolder" Style="{StaticResource Ghost}" Content="Open download folder"/>
+            </StackPanel>
+          </StackPanel>
+        </ScrollViewer>
+      </Grid>
+
+      <!-- ISO upgrade -->
+      <Grid x:Name="pageIso" Margin="38,32,38,20" Visibility="Collapsed">
+        <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="*"/></Grid.RowDefinitions>
+        <StackPanel Margin="0,0,0,20">
+          <TextBlock Text="ISO upgrade" Style="{StaticResource H1}"/>
+          <TextBlock Text="For Windows 10 and older Windows 11 versions. Runs a full in-place upgrade and keeps your files." Style="{StaticResource Sub}"/>
+        </StackPanel>
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+          <StackPanel Margin="0,0,14,0">
+            <Border Style="{StaticResource Card}">
+              <StackPanel>
+                <TextBlock Text="Which ISO you need" Style="{StaticResource CardTitle}" Margin="0,0,0,10"/>
+                <TextBlock x:Name="isoNeed" Style="{StaticResource Muted}" FontSize="13.5" LineHeight="22"/>
+                <StackPanel Orientation="Horizontal" Margin="0,18,0,0">
+                  <Button x:Name="btnIsoDownload" Style="{StaticResource Primary}" Content="Download ISO" Margin="0,0,10,0"/>
+                  <Button x:Name="btnIsoBrowse" Content="I already have an ISO..." Margin="0,0,10,0"/>
+                  <Button x:Name="btnIsoCancel" Content="Cancel" Visibility="Collapsed"/>
+                </StackPanel>
+              </StackPanel>
+            </Border>
+
+            <Border x:Name="isoProgCard" Style="{StaticResource Card}" Visibility="Collapsed">
+              <StackPanel>
+                <TextBlock x:Name="isoAction" FontWeight="SemiBold" FontSize="14.5" Margin="0,0,0,12"/>
+                <ProgressBar x:Name="isoBar"/>
+                <Grid Margin="0,10,0,0">
+                  <TextBlock x:Name="isoDetail" Style="{StaticResource Lbl}" HorizontalAlignment="Left"/>
+                  <TextBlock x:Name="isoSpeed" Style="{StaticResource Lbl}" HorizontalAlignment="Right"/>
+                </Grid>
+              </StackPanel>
+            </Border>
+
+            <Border x:Name="isoCheckCard" Style="{StaticResource Card}" Visibility="Collapsed">
+              <StackPanel>
+                <TextBlock Text="ISO check" Style="{StaticResource CardTitle}" Margin="0,0,0,2"/>
+                <TextBlock x:Name="isoPath" Style="{StaticResource Lbl}" Margin="0,0,0,12"/>
+                <StackPanel x:Name="isoChecks"/>
+                <StackPanel Orientation="Horizontal" Margin="0,16,0,0">
+                  <Button x:Name="btnIsoStart" Style="{StaticResource Primary}" Content="Start Windows Setup" Margin="0,0,10,0"/>
+                </StackPanel>
+                <TextBlock x:Name="isoSetupState" Margin="0,12,0,0" Style="{StaticResource Muted}"/>
+              </StackPanel>
+            </Border>
+
+            <TextBlock x:Name="isoResult" FontSize="14" Margin="2,0,0,14" Visibility="Collapsed"/>
+          </StackPanel>
+        </ScrollViewer>
+      </Grid>
+
+      <!-- Tools -->
+      <Grid x:Name="pageTools" Margin="38,32,38,20" Visibility="Collapsed">
+        <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="*"/></Grid.RowDefinitions>
+        <StackPanel Margin="0,0,0,20">
+          <TextBlock Text="Tools" Style="{StaticResource H1}"/>
+          <TextBlock Text="Stand-alone helpers. Each one asks before it changes anything." Style="{StaticResource Sub}"/>
+        </StackPanel>
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+          <StackPanel Margin="0,0,14,0">
+            <Border Style="{StaticResource Card}">
+              <Grid>
+                <Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+                <StackPanel Margin="0,0,24,0">
+                  <TextBlock Text="Skip the Windows 11 hardware checks" Style="{StaticResource CardTitle}"/>
+                  <TextBlock Text="Sets the registry values that let Setup run on a PC Microsoft lists as unsupported (TPM, Secure Boot, RAM, CPU, storage). Keeps &quot;Keep personal files and apps&quot; available." Style="{StaticResource Muted}" Margin="0,6,0,0"/>
+                  <TextBlock x:Name="bypassState" Style="{StaticResource Lbl}" Margin="0,8,0,0"/>
+                </StackPanel>
+                <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                  <Button x:Name="btnBypassApply" Style="{StaticResource Primary}" Content="Apply" Margin="0,0,0,8" MinWidth="110"/>
+                  <Button x:Name="btnBypassUndo" Content="Undo" MinWidth="110"/>
+                </StackPanel>
+              </Grid>
+            </Border>
+            <Border Style="{StaticResource Card}">
+              <Grid>
+                <Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+                <StackPanel Margin="0,0,24,0">
+                  <TextBlock Text="Fix &quot;We couldn't update the system reserved partition&quot;" Style="{StaticResource CardTitle}"/>
+                  <TextBlock Text="The EFI System Partition is full, almost always of old boot fonts. This mounts it, clears only the EFI\Microsoft\Boot\Fonts folder and unmounts it again. UEFI PCs only." Style="{StaticResource Muted}" Margin="0,6,0,0"/>
+                  <TextBlock x:Name="efiState" Style="{StaticResource Lbl}" Margin="0,8,0,0"/>
+                </StackPanel>
+                <Button x:Name="btnEfiFix" Grid.Column="1" Content="Run the fix" VerticalAlignment="Center" MinWidth="110"/>
+              </Grid>
+            </Border>
+          </StackPanel>
+        </ScrollViewer>
+      </Grid>
+
+      <!-- About -->
+      <Grid x:Name="pageAbout" Margin="38,32,38,20" Visibility="Collapsed">
+        <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="*"/></Grid.RowDefinitions>
+        <StackPanel Margin="0,0,0,20">
+          <TextBlock Text="About" Style="{StaticResource H1}"/>
+          <TextBlock Text="What this tool reads, what it changes, and what it never does." Style="{StaticResource Sub}"/>
+        </StackPanel>
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+          <StackPanel Margin="0,0,14,0">
+            <Border Style="{StaticResource Card}">
+              <StackPanel>
+                <TextBlock Text="What it does" Style="{StaticResource CardTitle}" Margin="0,0,0,8"/>
+                <TextBlock x:Name="aboutDoes" Style="{StaticResource Muted}" LineHeight="22"/>
+                <TextBlock Text="What it never does" Style="{StaticResource CardTitle}" Margin="0,18,0,8"/>
+                <TextBlock x:Name="aboutNever" Style="{StaticResource Muted}" LineHeight="22"/>
+                <TextBlock Text="Use at your own risk. Installing Windows 11 on unsupported hardware is not supported by Microsoft. Back up your files first." Foreground="#FBBF24" Margin="0,18,0,0"/>
+              </StackPanel>
+            </Border>
+            <StackPanel Orientation="Horizontal">
+              <Button x:Name="btnOpenLog" Content="Open log" Margin="0,0,10,0"/>
+              <Button x:Name="btnOpenOriginal" Style="{StaticResource Ghost}" Content="Inspired by Tips2Fix Windows 11 Installer"/>
+            </StackPanel>
+          </StackPanel>
+        </ScrollViewer>
+      </Grid>
+    </Grid>
+
+    <!-- Dialog overlay -->
+    <Grid x:Name="overlay" Grid.ColumnSpan="2" Background="#B2000000" Visibility="Collapsed">
+      <Border Width="480" CornerRadius="16" Background="#1A1A24" BorderBrush="#3A2F66" BorderThickness="1" Padding="26"
+              HorizontalAlignment="Center" VerticalAlignment="Center">
+        <StackPanel>
+          <TextBlock x:Name="dlgTitle" FontSize="19" FontWeight="SemiBold"/>
+          <TextBlock x:Name="dlgMsg" Style="{StaticResource Muted}" FontSize="13.5" Margin="0,10,0,0" LineHeight="21"/>
+          <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,24,0,0">
+            <Button x:Name="btnDlgNo" Content="Cancel" Margin="0,0,10,0"/>
+            <Button x:Name="btnDlgYes" Style="{StaticResource Primary}" Content="Continue"/>
+          </StackPanel>
+        </StackPanel>
+      </Border>
+    </Grid>
+  </Grid>
+</Window>
